@@ -18,7 +18,7 @@ function! s:NewEmmetBuffer()
 endfunction
 
 " render the emmet line
-function! s:EmmetAutoShow()
+function! EmmetAutoShow()
 	" save the current cursor position to the register a
 	" yank the current line and past it below
 	normal mayyp
@@ -38,10 +38,10 @@ function! s:EmmetAutoShow()
 endfunction
 
 " save the emmet line and close the buffer
-function! s:CloseEmmetBuffer()
+function! CloseEmmetBuffer()
 	normal yy
 	quit!
 endfunction
 
 " define user-accessible command
-command! SE call s:NewEmmetBuffer()
+command! ES call s:NewEmmetBuffer()
