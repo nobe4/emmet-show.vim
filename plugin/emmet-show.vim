@@ -1,21 +1,30 @@
 " load plugin only once
 " && verify vim is nocompatible
-if exists("g:emmet_show_version") || &cp
+if exists("g:loaded_emmet_show") || &cp
 	  finish
 endif
 
 " plugin version
-let g:emmet_show_version = 0.1
+let g:loaded_emmet_show = 1
+
+function! DisableCompletionPopup()
+	if g:loaded_neocomplete == 1
+		NeoCompleteLock
+	end
+endfunction
 
 " create the new emmet buffer where the preview will be placed
 function! s:NewEmmetBuffer()
 	new
 	set ft=html " change filetype for preview coloration
+	" remove the omnicompletion menu
+	call DisableCompletionPopup()
 	" map every key in insertmode to call the rendering
 	autocmd CursorMovedI <buffer> :call EmmetAutoShow()
 	" map return to save and quit
 	nnoremap <buffer> <CR> :call CloseEmmetBuffer()<CR>
 endfunction
+
 
 " render the emmet line
 function! EmmetAutoShow()
